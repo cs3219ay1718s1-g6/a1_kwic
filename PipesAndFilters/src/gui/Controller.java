@@ -9,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import pipes.Pipeline;
+
+import java.io.*;
 
 public class Controller {
 
@@ -65,7 +68,7 @@ public class Controller {
     // Actions
     //-----------------------------------------------
     @FXML
-    private void onAddTitleButtonClick() {
+    private void onAddTitleButtonClicked() {
         addCurrentTitle();
     }
 
@@ -113,5 +116,65 @@ public class Controller {
 
     private void triggerPipeline() {
         pipeline.receiveInput(titles);
+    }
+
+    //-----------------------------------------------
+    // Save and Open Actions
+    //-----------------------------------------------
+    @FXML
+    private void onSaveButtonClicked() {
+        if (titles.size() == 0) {
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Plain Text File (*.txt)", "*.txt")
+        );
+        File file = fileChooser.showSaveDialog(MainApplication.getCurrentPrimaryStage());
+
+        if (file != null) {
+            try {
+                FileWriter writer = new FileWriter(file);
+                BufferedWriter bufferedWriter = new BufferedWriter(writer);
+                for (String line : titles) {
+                    bufferedWriter.write(line);
+                    bufferedWriter.write('\n');
+                }
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    private void onOpenButtonClicked() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select a Text File");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Plain Text File (*.txt)", "*.txt")
+        );
+        File file = fileChooser.showOpenDialog(MainApplication.getCurrentPrimaryStage());
+
+        if (file != null) {
+            try {
+                FileReader reader = new FileReader(file);
+                BufferedReader bufferedReader = new BufferedReader(reader);
+                String line;
+
+                titles.clear();
+                while ((line = bufferedReader.readLine()) != null) {
+                    titles.add(line);
+                }
+
+                bufferedReader.close();
+                triggerPipeline();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -13,8 +13,8 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Open..." />
-            <Button mnemonicParsing="false" text="Save" />
+          <Button mnemonicParsing="false" onAction="#onOpenButtonClicked" text="Open..." />
+            <Button mnemonicParsing="false" onAction="#onSaveButtonClicked" text="Save" />
         </items>
       </ToolBar>
    </top>
@@ -22,7 +22,7 @@
       <AnchorPane prefHeight="440.0" prefWidth="255.0" BorderPane.alignment="CENTER">
          <children>
             <ListView fx:id="titleListView" prefHeight="398.0" prefWidth="256.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button fx:id="addTitleButton" disable="true" layoutX="191.0" layoutY="405.0" mnemonicParsing="false" onAction="#onAddTitleButtonClick" prefHeight="27.0" prefWidth="55.0" text="Add" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0" />
+            <Button fx:id="addTitleButton" disable="true" layoutX="191.0" layoutY="405.0" mnemonicParsing="false" onAction="#onAddTitleButtonClicked" prefHeight="27.0" prefWidth="55.0" text="Add" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0" />
             <Label fx:id="titleEmptyStateLabel" layoutX="52.0" layoutY="177.0" prefHeight="45.0" prefWidth="149.0" style="-fx-background-color: #ffffff;" text="Add a title using the text field below" textAlignment="CENTER" textFill="#909090" wrapText="true">
                <font>
                   <Font size="15.0" />
