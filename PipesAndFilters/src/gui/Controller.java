@@ -177,4 +177,11 @@ public class Controller {
             }
         }
     }
+
+    //-----------------------------------------------
+    // List View Editing
+    //-----------------------------------------------
+    @FXML
+    private void onTitleListViewEditStart() {
+    }
 }
