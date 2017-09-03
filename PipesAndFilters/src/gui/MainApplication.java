@@ -25,7 +25,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("controller.fxml"));
-        primaryStage.setTitle("KWIC");
+        primaryStage.setTitle("KWIC A1 - Pipes and Filters");
         primaryStage.setScene(new Scene(root, 640, 480));
         setCurrentPrimaryStage(primaryStage);
         primaryStage.show();
