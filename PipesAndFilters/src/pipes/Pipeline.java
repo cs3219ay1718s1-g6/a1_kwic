@@ -17,17 +17,17 @@ public class Pipeline<I, O> {
     // Constants
     //-----------------------------------------------
     @SuppressWarnings("unchecked")
-    public Pipeline(List<O> reservoir, Filter... filters) {
+    public Pipeline(List<O> sink, Filter... filters) {
         assert filters.length > 0;
         // Save the reference to the first filter
         inputFilter = filters[0];
         // Chain the filters one after another
         for (int index = 0; index < filters.length - 1; ++index) {
-            filters[index].addPipe(filters[index + 1]);
+            filters[index].addPipe(new Pipe(filters[index + 1]));
         }
         // Pipe the last filter to a custom output filter
-        // that pushes the data to the `reservoir`
-        filters[filters.length - 1].addPipe(new PipelineOutputFilter<>(reservoir));
+        // that pushes the data to the `sink`
+        filters[filters.length - 1].addPipe(new Pipe<>(new PipelineOutputFilter<>(sink)));
     }
 
     //-----------------------------------------------
