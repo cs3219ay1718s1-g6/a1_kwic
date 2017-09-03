@@ -81,7 +81,7 @@ public class Controller {
     }
 
     private boolean isCurrentTitleValidForAdding() {
-        return (addTitleTextField.getText().length() > 0);
+        return (addTitleTextField.getText().trim().length() > 0);
     }
 
     private void addCurrentTitle() {
