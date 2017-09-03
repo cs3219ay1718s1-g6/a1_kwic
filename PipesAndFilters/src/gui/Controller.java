@@ -82,6 +82,12 @@ public class Controller {
         addTitleButton.setDisable(!isCurrentTitleValidForAdding());
     }
 
+    @FXML
+    private void onClearButtonClicked() {
+        titles.clear();
+        triggerPipeline();
+    }
+
     private boolean isCurrentTitleValidForAdding() {
         return (addTitleTextField.getText().length() > 0);
     }
@@ -111,7 +117,8 @@ public class Controller {
                 new CircularShiftFilter(),
                 new IgnoreFilter(),
                 new CapitalizeFilter(),
-                new AlphabetizeFilter()
+                new AlphabetizeFilter(),
+                new DedupeFilter()
         );
     }
 
