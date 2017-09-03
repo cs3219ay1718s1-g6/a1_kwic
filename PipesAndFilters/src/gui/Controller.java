@@ -110,6 +110,7 @@ public class Controller {
                 shiftedTitles,
                 new CircularShiftFilter(),
                 new IgnoreFilter(),
+                new CapitalizeFilter(),
                 new AlphabetizeFilter()
         );
     }

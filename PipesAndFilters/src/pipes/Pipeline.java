@@ -43,18 +43,18 @@ public class Pipeline<I, O> {
     private static class PipelineOutputFilter<E> extends Filter<E, Void> {
 
         // Properties
-        private List<E> reservoir;
+        private List<E> sink;
 
         // Constructor
         private PipelineOutputFilter(List<E> reservoir) {
-            this.reservoir = reservoir;
+            this.sink = reservoir;
         }
 
         // Overrides
         @Override
         public void receiveInput(Stream<E> input) {
-            reservoir.clear();
-            reservoir.addAll(input.collect(Collectors.toList()));
+            sink.clear();
+            sink.addAll(input.collect(Collectors.toList()));
         }
 
         @Override
