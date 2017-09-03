@@ -1,5 +1,7 @@
 package filters;
 
+import pipes.Pipe;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -9,13 +11,13 @@ public abstract class Filter<I, O> {
     //-----------------------------------------------
     // Properties
     //-----------------------------------------------
-    private Set<Filter<O, ?>> outputFilters;
+    private Set<Pipe<O>> connectedPipes;
 
     //-----------------------------------------------
     // Constructor
     //-----------------------------------------------
-    public Filter() {
-        outputFilters = new LinkedHashSet<>();
+    protected Filter() {
+        connectedPipes = new LinkedHashSet<>();
     }
 
     //-----------------------------------------------
@@ -23,17 +25,17 @@ public abstract class Filter<I, O> {
     //-----------------------------------------------
     public void receiveInput(Stream<I> input) {
         Stream<O> output = this.transform(input);
-        for (Filter<O, ?> outputFilter : this.outputFilters) {
-            outputFilter.receiveInput(output);
+        for (Pipe<O> outgoingPipe : this.connectedPipes) {
+            outgoingPipe.receiveInput(output);
         }
     }
 
-    public <E> void addPipe(Filter<O, E> nextFilter) {
-        this.outputFilters.add(nextFilter);
+    public void addPipe(Pipe<O> pipe) {
+        this.connectedPipes.add(pipe);
     }
 
-    public <E> void removePipe(Filter<O, E> nextFilter) {
-        this.outputFilters.remove(nextFilter);
+    public void removePipe(Pipe<O> pipe) {
+        this.connectedPipes.remove(pipe);
     }
 
     //-----------------------------------------------
