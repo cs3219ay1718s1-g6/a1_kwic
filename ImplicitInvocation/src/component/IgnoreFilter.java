@@ -19,6 +19,8 @@ public class IgnoreFilter extends Tool {
         IGNORE_SET.addAll(Arrays.asList(WORDS_TO_IGNORE.split("\\s+")));
     }
 
+    public IgnoreFilter() { }
+
     public IgnoreFilter(TaskCompleteListener callback) {
         super(callback);
     }
@@ -38,7 +40,7 @@ public class IgnoreFilter extends Tool {
             return !IGNORE_SET.contains(stringToCheck.toLowerCase());
         }).collect(Collectors.toList());
 
-        this.callback.onTaskComplete(this.output);
+        this.callback(this.output);
     }
 }
 

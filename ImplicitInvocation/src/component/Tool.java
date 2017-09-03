@@ -14,9 +14,19 @@ public abstract class Tool {
     protected List<String> output;
     protected TaskCompleteListener callback;
 
+    public Tool() {}
+
     public Tool(TaskCompleteListener callback) {
         this.callback = callback;
     }
 
     public abstract void transform(List<String> input);
+
+    public void setTaskCompleteListener(TaskCompleteListener callback) {
+        this.callback = callback;
+    }
+
+    public void callback(List<String> output) {
+        if(this.callback != null) { this.callback.onTaskComplete(output); }
+    }
 }

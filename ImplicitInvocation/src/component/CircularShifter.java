@@ -7,10 +7,7 @@ import java.util.List;
 
 public class CircularShifter extends Tool {
 
-    //-----------------------------------------------
-    // Required Variables
-    //-----------------------------------------------
-    private List<String> shiftedLines;
+    public CircularShifter() {}
 
     public CircularShifter(TaskCompleteListener callback) { super(callback); }
 
@@ -20,7 +17,7 @@ public class CircularShifter extends Tool {
     public void transform(List<String> input) {
 
         //instantiate a new copy of shiftedLines
-        this.shiftedLines = new ArrayList<>();
+        this.output = new ArrayList<>();
 
         for(int lineIndex = 0; lineIndex < input.size(); lineIndex++) {
             String line = input.get(lineIndex);
@@ -33,9 +30,9 @@ public class CircularShifter extends Tool {
                         stringBuilder.append(' ');
                     }
                 }
-                shiftedLines.add(stringBuilder.toString());
+                output.add(stringBuilder.toString());
             }
-            this.callback.onTaskComplete(shiftedLines);
+            this.callback(output);
         }
     }
 }

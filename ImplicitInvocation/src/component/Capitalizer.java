@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Capitalizer extends Tool {
 
+    public Capitalizer() {}
+
     public Capitalizer(TaskCompleteListener callback) {
         super(callback);
     }
@@ -20,12 +22,14 @@ public class Capitalizer extends Tool {
             input.set(lineIndex, getFormattedText(line));
 
             this.output = input;
-            this.callback.onTaskComplete(this.output);
+            this.callback(this.output);
         }
     }
 
     // return a string with the first character capitalized
     private String getFormattedText(String line) {
-        return line.substring(0, 1).toUpperCase() + line.substring(1);
+        line = line.trim();
+        line = line.substring(0, 1).toUpperCase() + line.substring(1);
+        return line;
     }
 }

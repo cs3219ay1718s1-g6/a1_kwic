@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class Alphabetizer extends Tool {
 
+    public Alphabetizer() { }
+
     public Alphabetizer(TaskCompleteListener callback) {
         super(callback);
     }
@@ -17,6 +19,6 @@ public class Alphabetizer extends Tool {
     public void transform(List<String> input) {
         this.data = input.stream();
         this.output = data.sorted(String::compareToIgnoreCase).collect(Collectors.toList());
-        this.callback.onTaskComplete(this.output);
+        this.callback(this.output);
     }
 }
