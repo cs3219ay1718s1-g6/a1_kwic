@@ -3,7 +3,6 @@ package filters;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
